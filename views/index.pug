@@ -14,17 +14,21 @@ block content
         .row
           .col-6.mt-3
             .row
-              .col
-                button.btn.btn-success.mb-3.btn-lg.float-end.btnCrud(type='submit') Insert(10.000)
+              form.row.form-inline(method="POST" action="/citus-insert"  name="citus-insert")
+                .col
+                  button.btn.btn-success.mb-3.btn-lg.float-end.rounded-0.btnCrud(type='submit') Insert(10.000)
             .row
-              .col
-                button.btn.btn-warning.mb-3.btn-lg.float-end.btnCrud(type='submit') Update(10.000)
+              form.row.form-inline(method="POST" action="/citus-update"  name="citus-update")
+                .col
+                  button.btn.btn-warning.mb-3.btn-lg.float-end.rounded-0.btnCrud(type='submit') Update(10.000)
             .row
-              .col
-                button.btn.btn-danger.mb-3.btn-lg.float-end.btnCrud(type='button') Delete(10.000)
+              form.row.form-inline(method="POST" action="/citus-delete"  name="citus-delete")
+                .col
+                  button.btn.btn-danger.mb-3.btn-lg.float-end.rounded-0.btnCrud(type='submit') Delete(10.000)
             .row
-              .col
-                button.btn.btn-dark.mb-3.btn-lg.float-end.btnCrud(type='submit') Select(10.000)
+              form.row.form-inline(method="GET" action="/citus-select"  name="citus-select")
+                .col
+                  button.btn.btn-dark.mb-3.btn-lg.float-end.rounded-0.btnCrud(href='#', type='submit') Select(10.000)
           .col-6.mt-3
             .alert.alert-success(role='alert')
               h4
@@ -39,38 +43,42 @@ block content
                 b 3 ms
               i.mb-0 Number of rows affected: 10.000 rows
     .row
-        .col-9
-          .row
-            .col.mt-6.offset-3
-              h2.alert-heading PosgreSQL Replication
-              p
-                | Total data: 
-                b 10.000
+      .col-9
+        .row
+          .col.mt-6.offset-3
+            h2.alert-heading PosgreSQL Replication
+            p
+              | Total data: 
+              b 10.000
+            hr
+        .row
+          .col-6.mt-3
+            .row
+              form.row.form-inline(method="POST" action="/pg-insert"  name="pg-insert")
+                .col
+                  button.btn.btn-success.mb-3.btn-lg.float-end.rounded-0.btnCrud(type='submit') Insert(10.000)
+            .row
+              form.row.form-inline(method="POST" action="/pg-update"  name="pg-update")
+                .col
+                  button.btn.btn-warning.mb-3.btn-lg.float-end.rounded-0.btnCrud(type='submit') Update(10.000)
+            .row
+              form.row.form-inline(method="POST" action="/pg-delete"  name="pg-delete")
+                .col
+                  button.btn.btn-danger.mb-3.btn-lg.float-end.rounded-0.btnCrud(type='submit') Delete(10.000)
+            .row
+              form.row.form-inline(method="GET" action="/pg-select"  name="pg-select")
+                .col
+                  button.btn.btn-dark.mb-3.btn-lg.float-end.rounded-0.btnCrud(type='submit') Select(10.000)
+          .col-6.mt-3
+            .alert.alert-success(role='alert')
+              h4
+                | Start time: 
+                b 04: 32:52:153
+              h4
+                | End time: 
+                b 04:35:52:153
               hr
-          .row
-            .col-6.mt-3
-              .row
-                .col
-                  button.btn.btn-success.mb-3.btn-lg.float-end.btnCrud(type='submit') Insert(10.000)
-              .row
-                .col
-                  button.btn.btn-warning.mb-3.btn-lg.float-end.btnCrud(type='submit') Update(10.000)
-              .row
-                .col
-                  button.btn.btn-danger.mb-3.btn-lg.float-end.btnCrud(type='button') Delete(10.000)
-              .row
-                .col
-                  button.btn.btn-dark.mb-3.btn-lg.float-end.btnCrud(type='submit') Select(10.000)
-            .col-6.mt-3
-              .alert.alert-success(role='alert')
-                h4
-                  | Start time: 
-                  b 04: 32:52:153
-                h4
-                  | End time: 
-                  b 04:35:52:153
-                hr
-                h3
-                  | Result time: 
-                  b 3 ms
-                i.mb-0 Number of rows affected: 10.000 rows
+              h3
+                | Result time: 
+                b 3 ms
+              i.mb-0 Number of rows affected: 10.000 rows
