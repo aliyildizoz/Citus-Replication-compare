@@ -1,5 +1,5 @@
-const {performance} = require('perf_hooks');
-const {citusPool,pgReplication} = require('.././db');
+const { performance } = require('perf_hooks');
+const { citusPool, pgReplication } = require('.././db');
 
 
 const insert = async (pool) => {
@@ -35,17 +35,17 @@ const citus_insert = async (req, res, next) => {
     var t0 = performance.now();
     await insert(citusPool);
     var t1 = performance.now();
-    var count=await getCount(citusPool);
+    var count = await getCount(citusPool);
 
-    res.render("index", { citusStartTime: t0, citusEndTime: t1, citusResultTime: (t1-t0), citusCount:count });
+    res.render("index", { citusStartTime: t0, citusEndTime: t1, citusResultTime: (t1 - t0), citusCount: count });
 }
 const citus_select = async (req, res, next) => {
     var t0 = performance.now();
     await select(citusPool);
     var t1 = performance.now();
-    var count=await getCount(citusPool);
+    var count = await getCount(citusPool);
 
-    res.render("index", { startTime: t0, endTime: t1, resultTime: (t1-t0), citusCount:count });
+    res.render("index", { startTime: t0, endTime: t1, resultTime: (t1 - t0), citusCount: count });
 }
 
 //PG
@@ -53,24 +53,37 @@ const pg_insert = async (req, res, next) => {
     var t0 = performance.now();
     await insert(pgReplication.masterPool);
     var t1 = performance.now();
-    var count=await getCount(pgReplication.slave1Pool);
-    res.render("index", { pgStartTime: t0, pgEndTime: t1, pgResultTime: (t1-t0) });
+    var count = await getCount(pgReplication.slave1Pool);
+    res.render("index", { pgStartTime: t0, pgEndTime: t1, pgResultTime: (t1 - t0) });
 }
 const pg_select = async (req, res, next) => {
     var t0 = performance.now();
     await select(pgReplication.slave1Pool);
     var t1 = performance.now();
-    var count=await getCount(pgReplication.slave1Pool);
+    var count = await getCount(pgReplication.slave1Pool);
 
-    res.render("index", { pgStartTime: t0, pgEndTime: t1, pgResultTime: (t1-t0), pgCount:count });
+    res.render("index", { pgStartTime: t0, pgEndTime: t1, pgResultTime: (t1 - t0), pgCount: count });
 }
+
+
+
+const get = async (req, res, next) => {
+
+    // var citusCount = await getCount(citusPool);
+    var pgCount = await getCount(pgReplication.slave1Pool);
+
+    res.render("index", { pgCount, citusCount:pgCount });
+}
+
+
 module.exports = {
     citus: {
         citus_insert,
         citus_select
     },
-    pg:{
+    pg: {
         pg_insert,
         pg_select
-    }
+    },
+    get
 }
