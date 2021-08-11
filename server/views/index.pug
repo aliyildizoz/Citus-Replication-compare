@@ -9,7 +9,7 @@ block content
             h2.alert-heading Citus
             p
               | Total data: 
-              b 10.000
+              b= citusCount
             hr
         .row
           .col-6.mt-3
@@ -28,7 +28,7 @@ block content
             .row
               form.row.form-inline(method="GET" action="/citus-select"  name="citus-select")
                 .col
-                  button.btn.btn-dark.mb-3.btn-lg.float-end.rounded-0.btnCrud(href='#', type='submit') Select(#{citusCount})
+                  button.btn.btn-dark.mb-3.btn-lg.float-end.rounded-0.btnCrud(type='submit') Select(#{citusCount})
           .col-6.mt-3
             .alert.alert-success(role='alert')
               h4
