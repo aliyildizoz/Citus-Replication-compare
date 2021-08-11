@@ -27,10 +27,8 @@ router.get('/citus-select', indexCtrl.citus.citus_select);
 
 // /* POSGRESQL REPLICATION */
 
-// router.post('/pg-insert', function (req, res, next) {
-//   console.log("pg-insert");
-//   res.render('index', { title: 'Express' });
-// });
+router.post('/pg-insert', indexCtrl.pg.pg_insert);
+router.get('/pg-select', indexCtrl.pg.pg_select);
 
 // router.post('/pg-update', function (req, res, next) {
 //   console.log("pg-update");
@@ -39,11 +37,6 @@ router.get('/citus-select', indexCtrl.citus.citus_select);
 
 // router.post('/pg-delete', function (req, res, next) {
 //   console.log("pg-delete");
-//   res.render('index', { title: 'Express' });
-// });
-
-// router.get('/pg-select', function (req, res, next) {
-//   console.log("pg-select");
 //   res.render('index', { title: 'Express' });
 // });
 

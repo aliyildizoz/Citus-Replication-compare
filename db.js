@@ -4,8 +4,8 @@ const slave1Pool = new Pool({
   user: "postgres",
   password: "my_password",
   host: "localhost",
-  port: 5432,
-  database: "perntodo",
+  port: 64530,
+  database: "postgres",
 });
 
 
@@ -14,7 +14,7 @@ const slave2Pool = new Pool({
   password: "my_password",
   host: "localhost",
   port: 5432,
-  database: "perntodo",
+  database: "postgres",
 });
 
 
@@ -22,22 +22,21 @@ const masterPool = new Pool({
   user: "postgres",
   password: "my_password",
   host: "localhost",
-  port: 5432,
-  database: "perntodo",
+  port: 64529,
+  database: "postgres",
 });
 
 const citusPool = new Pool({
   user: "postgres",
-  password: "my_password",
+  password: "",
   host: "localhost",
-  port: 5432,
-  database: "perntodo",
+  port: 5500,
+  database: "postgres",
 });
 
 module.exports = {
   pgReplication: {
     slave1Pool,
-    slave2Pool,
     masterPool
   },
   citusPool
