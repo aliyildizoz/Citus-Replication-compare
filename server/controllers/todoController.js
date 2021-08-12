@@ -1,5 +1,5 @@
 const { performance } = require('perf_hooks');
-const { citusPool, pgReplication,pgPool } = require('.././db');
+const { citusPool, pgReplication, pgPool } = require('../db');
 
 
 const insert = async (pool) => {
@@ -36,16 +36,16 @@ const citus_insert = async (req, res, next) => {
     await insert(pgPool);
     var t1 = performance.now();
     var count = await getCount(pgPool);
-    
-    res.render("index", { citusStartTime: t0, citusEndTime: t1, citusResultTime: (t1 - t0), citusCount: count });
+
+    res.json({ startTime: t0, endTime: t1, resultTime: (t1 - t0), count });
 }
 const citus_select = async (req, res, next) => {
     var t0 = performance.now();
     await select(pgPool);
     var t1 = performance.now();
     var count = await getCount(pgPool);
-    console.log(t1-t0);
-    res.render("index", { citusStartTime: t0, citusEndTime: t1, citusResultTime: (t1 - t0), citusCount: count });
+    console.log(t1 - t0);
+    res.json({ startTime: t0, endTime: t1, resultTime: (t1 - t0), count });
 }
 
 //PG
@@ -54,7 +54,7 @@ const pg_insert = async (req, res, next) => {
     await insert(pgReplication.masterPool);
     var t1 = performance.now();
     var count = await getCount(pgReplication.slave1Pool);
-    res.render("index", { pgStartTime: t0, pgEndTime: t1, pgResultTime: (t1 - t0) });
+    res.json({ startTime: t0, endTime: t1, resultTime: (t1 - t0), count });
 }
 const pg_select = async (req, res, next) => {
     var t0 = performance.now();
@@ -62,17 +62,17 @@ const pg_select = async (req, res, next) => {
     var t1 = performance.now();
     var count = await getCount(pgReplication.slave1Pool);
 
-    res.render("index", { pgStartTime: t0, pgEndTime: t1, pgResultTime: (t1 - t0), pgCount: count });
+    res.json({ startTime: t0, endTime: t1, resultTime: (t1 - t0), count });
 }
 
 
 
 const get = async (req, res, next) => {
-
+    console.log("get")
     var citusCount = await getCount(pgPool);
     var pgCount = await getCount(pgReplication.slave1Pool);
 
-    res.render("index", { pgCount, citusCount });
+    res.json({ pgCount, citusCount });
 }
 
 

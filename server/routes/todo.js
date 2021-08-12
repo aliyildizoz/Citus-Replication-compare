@@ -1,5 +1,5 @@
 var express = require('express');
-const indexCtrl = require('./../controllers/indexController');
+const indexCtrl = require('../controllers/todoController');
 var router = express.Router();
 
 /* GET home page. */

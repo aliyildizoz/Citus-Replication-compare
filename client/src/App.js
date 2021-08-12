@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState, useEffect } from 'react'
+import { Col, Container, Row } from 'react-bootstrap'
+import Citus from './components/Citus'
+import PostgresRepl from './components/PostgresRepl';
 function App() {
+
+  const [counts, setCounts] = useState({})
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    await fetch("http://localhost:5000/api/todos").then((res) => res.json()).then((data) => setCounts(data)).catch((err) => console.log(err));
+  }, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <Row>
+          <Citus count={counts.citusCount} />
+        </Row>
+        <Row className="mt-5">
+          <PostgresRepl count={counts.pgCount} />
+        </Row>
+      </Container>
     </div>
   );
 }
