@@ -44,7 +44,6 @@ const citus_select = async (req, res, next) => {
     await select(pgPool);
     var t1 = performance.now();
     var count = await getCount(pgPool);
-    console.log(t1 - t0);
     res.json({ startTime: t0, endTime: t1, resultTime: (t1 - t0), count });
 }
 
@@ -68,7 +67,6 @@ const pg_select = async (req, res, next) => {
 
 
 const get = async (req, res, next) => {
-    console.log("get")
     var citusCount = await getCount(pgPool);
     var pgCount = await getCount(pgReplication.slave1Pool);
 
