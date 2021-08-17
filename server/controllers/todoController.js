@@ -3,7 +3,7 @@ const { citusPool, pgReplication, pgPool } = require('../db');
 
 
 const insert = async (pool) => {
-    for (let i = 1; i <= 10000; i++) {
+    for (let i = 1; i <= 1000; i++) {
         await pool.query(
             "insert into todo (description) values($1) returning *",
             ["todo" + i]
@@ -33,17 +33,17 @@ const getCount = async (pool) => (await pool.query("SELECT Count(*) FROM todo"))
 //Citus
 const citus_insert = async (req, res, next) => {
     var t0 = performance.now();
-    await insert(pgPool);
+    await insert(citusPool);
     var t1 = performance.now();
-    var count = await getCount(pgPool);
+    var count = await getCount(citusPool);
 
     res.json({ startTime: t0, endTime: t1, resultTime: (t1 - t0), count });
 }
 const citus_select = async (req, res, next) => {
     var t0 = performance.now();
-    await select(pgPool);
+    await select(citusPool);
     var t1 = performance.now();
-    var count = await getCount(pgPool);
+    var count = await getCount(citusPool);
     res.json({ startTime: t0, endTime: t1, resultTime: (t1 - t0), count });
 }
 
@@ -67,7 +67,7 @@ const pg_select = async (req, res, next) => {
 
 
 const get = async (req, res, next) => {
-    var citusCount = await getCount(pgPool);
+    var citusCount = await getCount(citusPool);
     var pgCount = await getCount(pgReplication.slave1Pool);
 
     res.json({ pgCount, citusCount });

@@ -40,14 +40,14 @@ export default class Citus extends Component {
                     <Row>
                         <Col md={4} className="mt-3 ">
                             <Row>
-                                <Button className="btn-lg btn-success d-inline  rounded-1 mb-3 " disabled={!this.state.isFinished} onClick={this.onClickInsert}>Insert(10000)</Button>
+                                <Button className="btn-lg btn-success rounded-1 mb-3 " disabled={!this.state.isFinished} onClick={this.onClickInsert}>Insert(1000)</Button>
                             </Row>
-                            <Row>
+                            {/* <Row>
                                 <Button className="btn-lg btn-warning  rounded-1 mb-3 " disabled={!this.state.isFinished}>Update(10000)</Button>
                             </Row>
                             <Row>
                                 <Button className="btn-lg btn-danger  rounded-1 mb-3 " disabled={!this.state.isFinished}>Delete(10000)</Button>
-                            </Row>
+                            </Row> */}
                             <Row>
                                 <Button className="btn-lg btn-dark  rounded-1 mb-3 " disabled={!this.state.isFinished} onClick={this.onClickSelect}>Select({this.props.count < this.state.res.count ? this.state.res.count : this.props.count})</Button>
                             </Row>

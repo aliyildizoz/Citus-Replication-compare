@@ -4,7 +4,7 @@ const slave1Pool = new Pool({
   user: "postgres",
   password: "my_password",
   host: "localhost",
-  port: 64446,
+  port: 62931,
   database: "postgres",
 });
 
@@ -22,7 +22,7 @@ const masterPool = new Pool({
   user: "postgres",
   password: "my_password",
   host: "localhost",
-  port: 64445,
+  port: 62930,
   database: "postgres",
 });
 
@@ -36,9 +36,9 @@ const pgPool = new Pool({
 
 const citusPool = new Pool({
   user: "postgres",
-  password: "",
+  password: "123456",
   host: "localhost",
-  port: 5500,
+  port: 5501,
   database: "postgres",
 });
 
