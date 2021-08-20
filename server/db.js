@@ -4,25 +4,15 @@ const slave1Pool = new Pool({
   user: "postgres",
   password: "my_password",
   host: "localhost",
-  port: 62931,
+  port: 53370,
   database: "postgres",
 });
-
-
-const slave2Pool = new Pool({
-  user: "postgres",
-  password: "my_password",
-  host: "localhost",
-  port: 5432,
-  database: "postgres",
-});
-
 
 const masterPool = new Pool({
   user: "postgres",
   password: "my_password",
   host: "localhost",
-  port: 62930,
+  port: 60062,
   database: "postgres",
 });
 

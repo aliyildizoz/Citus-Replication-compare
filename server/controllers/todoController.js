@@ -3,7 +3,7 @@ const { citusPool, pgReplication, pgPool } = require('../db');
 
 
 const insert = async (pool) => {
-    for (let i = 1; i <= 1000; i++) {
+    for (let i = 1; i <= 1; i++) {
         await pool.query(
             "insert into todo (description) values($1) returning *",
             ["todo" + i]

@@ -40,7 +40,7 @@ export default class Citus extends Component {
                     <Row>
                         <Col md={4} className="mt-3 ">
                             <Row>
-                                <Button className="btn-lg btn-success rounded-1 mb-3 " disabled={!this.state.isFinished} onClick={this.onClickInsert}>Insert(1000)</Button>
+                                <Button className="btn-lg btn-success rounded-1 mb-3 " disabled={!this.state.isFinished} onClick={this.onClickInsert}>Insert</Button>
                             </Row>
                             {/* <Row>
                                 <Button className="btn-lg btn-warning  rounded-1 mb-3 " disabled={!this.state.isFinished}>Update(10000)</Button>
