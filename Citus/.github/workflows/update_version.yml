@@ -1,0 +1,30 @@
+name: Update Version on Docker Files
+on:
+ workflow_dispatch:
+    inputs:
+      project_version:
+        description: 'Version number to be released e.g 10.0.3'
+      postgres_version:
+        required: false
+        description: 'Postgres version number. If it is empty, postgres version will not be changed'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install package dependencies
+        run: sudo apt install libcurl4-openssl-dev libssl-dev
+
+      - name: Clone tools branch
+        run: git clone --branch develop https://github.com/citusdata/tools.git
+        
+      - name: Install python requirements
+        run: export PYTHONPATH="$(pwd)/tools" && python -m pip install -r tools/packaging_automation/requirements.txt
+        
+      - name: Update docker files
+        run: |
+          python -m tools.packaging_automation.update_docker --prj_ver ${{ github.event.inputs.project_version }} \
+          --gh-token ${{ secrets.GH_TOKEN }} --postgres_version ${{ github.event.inputs.postgres_version }}

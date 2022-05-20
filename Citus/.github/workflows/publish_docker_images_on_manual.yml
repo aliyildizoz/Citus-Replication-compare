@@ -1,0 +1,35 @@
+name: On Demand (Manual) Docker Image Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      trigger_type:
+        description: "Type of build which you want to trigger. Allowed values: main, tags, nightly"
+      tag_name:
+        description: "The tag name on the project repo to be released. It is mandatory if you select the trigger_type as 'tags' "
+        default: ""
+
+jobs:
+
+  build_and_publish_images:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Clone tools branch
+        run: git clone --depth=1 --branch develop https://github.com/citusdata/tools.git tools
+
+      - name: Install package dependencies
+        run: sudo apt install libcurl4-openssl-dev libssl-dev
+
+      - name: Install python requirements
+        run: python -m pip install -r tools/packaging_automation/requirements.txt
+
+      - name: Build and publish docker images
+        run: |
+            python -m  tools.packaging_automation.publish_docker  --pipeline_trigger_type "${GITHUB_EVENT_NAME}" \
+            --exec_path "$(pwd)" --tag_name ${{ github.event.inputs.tag_name }} \
+            --manual_trigger_type ${{ github.event.inputs.trigger_type }}
